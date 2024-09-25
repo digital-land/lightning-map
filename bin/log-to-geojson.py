@@ -9,7 +9,12 @@ logfile = sys.argv[1]
 
 e = {"type":"FeatureCollection", "features": []}
 
+n = 0
+
 for row in csv.DictReader(open(logfile, newline="")):
+    reference = f'p{n}-{row["secs"]}'
+    n = n + 1
+
     e["features"].append(
         {
             "type": "Feature",
@@ -17,6 +22,7 @@ for row in csv.DictReader(open(logfile, newline="")):
             "properties": {
                 "secs": row["secs"],
                 "client": row["client"],
+                "reference": reference,
             }
         }
     )
