@@ -1,3 +1,5 @@
+CDN_LOGS=$(wildcard var/cache/logs-insights-results-*.csv)
+
 var/lightning.svg:  var/lightning.geojson Makefile
 	svgis draw var/lightning.geojson --crs EPSG:3857 --scale 2000 -o $@
 
@@ -10,12 +12,13 @@ var/snapshot.geojson: data/snapshot.csv bin/log-to-geojson.py
 data/snapshot.csv: var/cache/snapshot.csv bin/convert-cdn-log.py
 	python3 bin/convert-cdn-log.py var/cache/snapshot.csv $@
 
-# CDN log is in reverse timestamp order ..
-var/cache/snapshot.csv: var/cache/cdn-snapshot.csv
-	csvsort var/cache/cdn-snapshot.csv > $@
+# CDN logs are in reverse timestamp order ..
+var/cache/snapshot.csv: $(CDN_LOGS) bin/sort.sh
+	bin/sort.sh $(CDN_LOGS) > $@
 
-clean clobber:
-	rm -f data/snapshot.csv
+clean::
+
+clobber::
 
 init::
 	pip install -r requirements.txt

@@ -69,7 +69,7 @@ if __name__ == "__main__":
         client = parse_client(row["user_agent"])
 
         # calculate interval
-        d = datetime.strptime(row["@timestamp"], "%Y-%m-%dT%H:%M:%S").timestamp()
+        d = datetime.strptime(row["@timestamp"][:19], "%Y-%m-%d %H:%M:%S").timestamp()
         if not first:
             first = d
         secs = d - first
