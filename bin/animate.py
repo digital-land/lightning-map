@@ -24,15 +24,15 @@ while line := sys.stdin.readline():
         print(
             """<style>
   svg {
-      background-color: #F8F8F8;
+      background-color: #ffffff;
   }
   circle {
-    stroke: black;
+    stroke: #0b0c0c;
     stroke-width: 2px;
-    fill: #eeeeee;
+    fill-opacity: 0;
   }
   #E92000001 {
-    fill: #eeeeee;
+    fill: #b1b4b6;
   }
 </style>
 """
