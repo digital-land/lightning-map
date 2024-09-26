@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html {
+	font-family: sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+
+<div class="row">
+  <div class="column">
+  <h1>Planning data API searches</h1>
+  <p>A visualisation of geospatial queries made to the <a href="https://www.planning.data.gov.uk/">Planning Data</a> <a href="https://www.planning.data.gov.uk/api/">API</a> on a single day in September 2024, sped up by 200 times. There are currently ~5k client requests every 24 hours, excluding browsers, spiders, and monitoring requests. </p>
+  <p>Code and data available on <a href="https://github.com/digital-land/lightning-map">GitHub</a>.</p>
+  </div>
+  <div class="column">
+    <img src="lightning.svg" height="100%">
+  </div>
+</body>
