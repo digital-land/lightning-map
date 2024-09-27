@@ -8,7 +8,9 @@ from datetime import datetime
 
 
 logfile = sys.argv[1]
-outfile = sys.argv[2] or "output.csv"
+
+outfile = sys.argv[2] if len(sys.argv) > 2 else "output.csv"
+max_secs = int(sys.argv[3]) if len(sys.argv) > 3 else 0
 
 # CloudFront log columns
 columns = ["@timestamp", "@message", "stem", "query", "user_agent"]
@@ -73,6 +75,9 @@ if __name__ == "__main__":
         if not first:
             first = d
         secs = d - first
+
+        if secs > max_secs:
+            break
 
         w.writerow(
             {

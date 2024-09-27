@@ -22,7 +22,7 @@ var/snapshot.geojson: data/snapshot.csv bin/log-to-geojson.py
 	python3 bin/log-to-geojson.py data/snapshot.csv > $@
 
 data/snapshot.csv: var/cache/snapshot.csv bin/convert-cdn-log.py
-	python3 bin/convert-cdn-log.py var/cache/snapshot.csv $@
+	python3 bin/convert-cdn-log.py var/cache/snapshot.csv $@ 86400
 
 # CDN logs are in reverse timestamp order ..
 var/cache/snapshot.csv: $(CDN_LOGS) bin/sort.sh
