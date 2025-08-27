@@ -3,6 +3,7 @@
 import sys
 import csv
 import re
+import json
 from urllib.parse import unquote
 from datetime import datetime
 
@@ -63,12 +64,16 @@ if __name__ == "__main__":
 
     for row in csv.DictReader(open(logfile, newline="")):
 
-        point = parse_point(row["query"])
+        data = json.loads(row['@message'])
+
+        query = row.get("query", data["cs-uri-query"])
+        point = parse_point(query)
 
         if not point:
             continue
 
-        client = parse_client(row["user_agent"])
+        user_agent = row.get("user_agent", data["cs(User-Agent)"])
+        client = parse_client(user_agent)
 
         # calculate interval
         d = datetime.strptime(row["@timestamp"][:19], "%Y-%m-%d %H:%M:%S").timestamp()
